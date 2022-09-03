@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Project-Unit Converter</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    function UnitConverter() {
+      const [amount, setAmount] = React.useState(0);
+      const [flipped, modifyFlip] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const reset = () => {
+        setAmount(0);
+      };
+      const onFlip = () => {
+        reset();
+        modifyFlip((current) => !current);
+      };
+      return (
+        <div>
+          <h1>Unit Converter</h1>
+          <div className="mToh">
+            <div>
+              <label htmlFor="minutes" className="minutes">
+                Minutes
+              </label>
+              <input value={flipped ? amount * 60 : amount} id="minutes" type="number" placeholder="minutes" onChange={onChange} disabled={flipped} />
+            </div>
+            <div>
+              <label htmlFor="hours" className="minutes">
+                Hours
+              </label>
+              <input value={!flipped ? Math.round(amount / 60) : amount} id="hours" type="number" placeholder="hours" disabled={!flipped} onChange={onChange} />
+            </div>
+          </div>
+          <div>
+            <button onClick={reset}>reset</button>
+            <button onClick={onFlip}>flip</button>
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.render(<UnitConverter />, root);
+  </script>
+</html>
