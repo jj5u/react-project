@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function Btn({ text, red }) {
+      return (
+        <button
+          style={{
+            backgroundColor: red ? "red" : "null",
+            padding: "10px 15px",
+            border: 0,
+            borderRadius: 10,
+            color: red ? "white" : "null",
+          }}
+        >
+          {text}
+        </button>
+      );
+    }
+    function App() {
+      return (
+        <div
+          style={{
+            display: "flex",
+          }}
+        >
+          <Btn text="save" red={true} />
+          <Btn text="confirm" />
+          <Btn text="cancel" red={false} />
+        </div>
+      );
+    }
+
+    /*     function SaveBtn() {
+      return (
+        <button
+          style={{
+            backgroundColor: "skyblue",
+            padding: "10px 15px",
+            border: 0,
+            borderRadius: 10,
+          }}
+        >
+          save
+        </button>
+      );
+    }
+    function ConfirmBtn() {
+      return (
+        <button
+          style={{
+            backgroundColor: "skyblue",
+            padding: "10px 15px",
+            border: 0,
+            borderRadius: 10,
+          }}
+        >
+          confirm
+        </button>
+      );
+    }
+    function CancelBtn() {
+      return (
+        <button
+          style={{
+            backgroundColor: "skyblue",
+            padding: "10px 15px",
+            border: 0,
+            borderRadius: 10,
+          }}
+        >
+          Cancel
+        </button>
+      );
+    }
+    function App() {
+      return (
+        <div>
+          <SaveBtn />
+          <ConfirmBtn />
+          <CancelBtn />
+        </div>
+      );
+    } */
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
