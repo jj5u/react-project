@@ -11,10 +11,10 @@
   </body>
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     function Btn({ text, onClick }) {
-      console.log(text, "was rendered");
       return (
         <button
           onClick={onClick}
@@ -28,71 +28,20 @@
         </button>
       );
     }
-    const MemorizedBtn = React.memo(Btn);
-    //use only to render if there is any changes in prop
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+    };
+    // set porp type to btn text
     function App() {
       const [value, setValue] = React.useState("save");
       const changeValue = () => setValue("revert");
       return (
         <div>
-          <MemorizedBtn text={value} onClick={changeValue} />
-          <MemorizedBtn text="cancel" />
+          <Btn text={false} onClick={changeValue} />
+          <Btn text="cancel" />
         </div>
       );
     }
-    // onClick is not an event listener in App()
-
-    /*     function SaveBtn() {
-      return (
-        <button
-          style={{
-            backgroundColor: "skyblue",
-            padding: "10px 15px",
-            border: 0,
-            borderRadius: 10,
-          }}
-        >
-          save
-        </button>
-      );
-    }
-    function ConfirmBtn() {
-      return (
-        <button
-          style={{
-            backgroundColor: "skyblue",
-            padding: "10px 15px",
-            border: 0,
-            borderRadius: 10,
-          }}
-        >
-          confirm
-        </button>
-      );
-    }
-    function CancelBtn() {
-      return (
-        <button
-          style={{
-            backgroundColor: "skyblue",
-            padding: "10px 15px",
-            border: 0,
-            borderRadius: 10,
-          }}
-        >
-          Cancel
-        </button>
-      );
-    }
-    function App() {
-      return (
-        <div>
-          <SaveBtn />
-          <ConfirmBtn />
-          <CancelBtn />
-        </div>
-      );
-    } */
     const root = document.getElementById("root");
     ReactDOM.render(<App />, root);
   </script>
