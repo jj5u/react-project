@@ -13,34 +13,34 @@
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function Btn({ text, red }) {
+    function Btn({ text, onClick }) {
+      console.log(text, "was rendered");
       return (
         <button
+          onClick={onClick}
           style={{
-            backgroundColor: red ? "red" : "null",
             padding: "10px 15px",
             border: 0,
             borderRadius: 10,
-            color: red ? "white" : "null",
           }}
         >
           {text}
         </button>
       );
     }
+    const MemorizedBtn = React.memo(Btn);
+    //use only to render if there is any changes in prop
     function App() {
+      const [value, setValue] = React.useState("save");
+      const changeValue = () => setValue("revert");
       return (
-        <div
-          style={{
-            display: "flex",
-          }}
-        >
-          <Btn text="save" red={true} />
-          <Btn text="confirm" />
-          <Btn text="cancel" red={false} />
+        <div>
+          <MemorizedBtn text={value} onClick={changeValue} />
+          <MemorizedBtn text="cancel" />
         </div>
       );
     }
+    // onClick is not an event listener in App()
 
     /*     function SaveBtn() {
       return (
